@@ -4,33 +4,50 @@
 	<title>Tip Calculator</title>
 </head>
 <body>
-	<h1>Hello World: enter in your total bill:<br></h1>
+	<h1>Enter in your total Bill:<br></h1>
 
-	<p>Bill Cost:</p>
+	<p>Bill Cost: 
+		<input type="text" id="billCost">
+			<button onclick="randomBill()" id="randomBill">Random Bill</button>
+		</p>
 
-	<input type="text" id="billCost">
-
+	
+	<p>Example Percentages:	
 	<button onclick="tipCalculator(.10)" id="tip" value="0.10">10%</button>
 	<button onclick="tipCalculator(.15)" id="tip" value="0.15">15%</button>
 	<button onclick="tipCalculator(.20)" id="tip" value="0.20">20%</button>
+	<button onclick="tipCalculator(.25)" id="tip" value="0.20">25%</button></p>	
 
-	<p>Custom Tip Percentage:</p>
-
-	<input type="text" id="customTip">
-
-	<button onclick="customTipCalculator()">Go</button>
+	<p>Custom Tip Percentage:
+		<input type="text" id="customTip">
+			<button onclick="customTipCalculator()">Go</button>
+	</p>
 
 	<script type="text/javascript">
+		function randomBill(){
+			var randomBill = Math.round(Math.random() * 100);
+			if (randomBill < 10) {
+				randomBill();
+			}
+			document.getElementById("billCost").value = randomBill;
+			//console.log(randomBill);
+		}
 		function tipCalculator(percent){
 			var mealcost = parseFloat(document.getElementById("billCost").value);
 			var tipPercent = percent; //parse float not required as values arent custom.
-			var tip = mealcost * tipPercent ;
+			var tip = Math.round(mealcost * tipPercent);
 			document.getElementById("output").innerHTML = "Tip your waitor/waitress: " + tip + " dollars.";
 		}
 		function customTipCalculator(){
 			var mealcost = parseFloat(document.getElementById("billCost").value);
 			var tipPercent = parseFloat(document.getElementById("customTip").value);
-			var tip = (mealcost * tipPercent) / 100;
+			if (tipPercent > 100) {
+				tipPercent = 100;
+			}
+			if (tipPercent <= 0) {
+				tipPercent = 0;
+			}
+			var tip = Math.round((mealcost * tipPercent) / 100);
 			document.getElementById("output").innerHTML = "Tip your waitor/waitress: " + tip + " dollars.";
 		}
 	</script>
