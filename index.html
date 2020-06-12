@@ -2,27 +2,59 @@
 <html>
 <head>
 	<title>Tip Calculator</title>
+	<style type="text/css">
+		.flex{
+			display: flex;
+			justify-content: space-between; 
+		}
+		.subGroup{
+			position: absolute;
+			bottom: 0;
+			right: 0;
+		}
+	</style>
 </head>
 <body>
 	<h1>Enter in your total Bill:<br></h1>
+	<div class="flex">
+		<div>
+			<p>Bill Cost: 
+			<input type="text" id="billCost" value="0">
+				<button onclick="randomBill()" id="randomBill" value="0">Random Bill</button>
+				<button onclick="clearBill()" id="clearBill" value="0">Clear</button>
+			</p>
+			<p>Example Percentages:	
+				<button onclick="tipCalculator(.10)" id="tip" value="0.10">10%</button>
+				<button onclick="tipCalculator(.15)" id="tip" value="0.15">15%</button>
+				<button onclick="tipCalculator(.20)" id="tip" value="0.20">20%</button>
+				<button onclick="tipCalculator(.25)" id="tip" value="0.20">25%</button></p>	
 
-	<p>Bill Cost: 
-		<input type="text" id="billCost">
-			<button onclick="randomBill()" id="randomBill">Random Bill</button>
-		</p>
+			<p>Custom Tip Percentage:
+				<input type="text" id="customTip">
+					<button onclick="customTipCalculator()">Go</button>
+			</p>
 
+			<p id="output"></p>
+		</div>
+
+		<div>
+
+			<button onclick="accumulateBill(9)" id="kyleSandwich" value="0" class="button">Kyle Sandwich</button>
+			<button onclick="multipleChoicesFries()" id="CurlyFries" value="0" class="button">Curly Fries</button><br>
+			<button onclick="multipleChoicesPepsi()" id="PepsiInACocaColaGlass" value="0" class="button">Pepsi In A Coca-Cola Glass</button>
+			
+
+		</div>
+	</div>
+
+	<div class="subGroup">
+		<button onclick="accumulateBill(3.25)" id="SmallCurlyFries" value="0" class="button" 	style="display: none;">Small Curly Fries</button>
+		<button onclick="accumulateBill(5.75)" id="LargeCurlyFries" value="0" class="button" 	style="display: none;">Large Curly Fries</button>
+		<button onclick="accumulateBill(1.50)" id="SmallPepsiInCokeGlass" value="0" class="		button" style="display: none;">Small</button>
+		<button onclick="accumulateBill(2.50)" id="MediumPepsiInCokeGlass" value="0" class="	button" style="display: none;">Medium</button>
+		<button onclick="accumulateBill(3.00)" id="E" value="0" class="button" style="display: none;">E</button>
+	</div>
 	
-	<p>Example Percentages:	
-	<button onclick="tipCalculator(.10)" id="tip" value="0.10">10%</button>
-	<button onclick="tipCalculator(.15)" id="tip" value="0.15">15%</button>
-	<button onclick="tipCalculator(.20)" id="tip" value="0.20">20%</button>
-	<button onclick="tipCalculator(.25)" id="tip" value="0.20">25%</button></p>	
-
-	<p>Custom Tip Percentage:
-		<input type="text" id="customTip">
-			<button onclick="customTipCalculator()">Go</button>
-	</p>
-
 	<script type="text/javascript">
 		function randomBill(){
 			var randomBill = Math.round(Math.random() * 100);
@@ -50,9 +82,64 @@
 			var tip = Math.round((mealcost * tipPercent) / 100);
 			document.getElementById("output").innerHTML = "Tip your waitor/waitress: " + tip + " dollars.";
 		}
+		function clearBill(){
+			document.getElementById("billCost").value = 0;
+			document.getElementById("output").innerHTML = "";
+		}
+		function accumulateBill(amount){
+			var billTotal = parseInt(document.getElementById("billCost").value);
+			
+			billTotal += amount;
+			document.getElementById("billCost").value = billTotal;
+
+		}
+		function multipleChoicesFries(){
+			if (document.getElementById("SmallCurlyFries").style.display = "none") {
+				document.getElementById("SmallCurlyFries").style.display = "inline-block"; 
+				document.getElementById("SmallCurlyFries").addEventListener("click", 
+					function(){
+						document.getElementById("SmallCurlyFries").style.display = "none";
+						document.getElementById("LargeCurlyFries").style.display = "none";
+				});
+			}
+			if (document.getElementById("LargeCurlyFries").style.display = "none") {
+				document.getElementById("LargeCurlyFries").style.display = "inline-block";
+				document.getElementById("LargeCurlyFries").addEventListener("click",
+					function(){
+						document.getElementById("SmallCurlyFries").style.display = "none";
+						document.getElementById("LargeCurlyFries").style.display = "none";
+					})
+			}
+		}
+		function multipleChoicesPepsi(){
+			if (document.getElementById("SmallPepsiInCokeGlass").style.display = "none") {
+				document.getElementById("SmallPepsiInCokeGlass").style.display = "inline-block";
+				document.getElementById("SmallPepsiInCokeGlass").addEventListener("click", function(){
+					document.getElementById("SmallPepsiInCokeGlass").style.display = "none";
+					document.getElementById("MediumPepsiInCokeGlass").style.display = "none";
+					document.getElementById("E").style.display = "none";
+				})
+			}
+			if(document.getElementById("MediumPepsiInCokeGlass").style.display = "none"){
+				document.getElementById("MediumPepsiInCokeGlass").style.display = "inline-block";
+				document.getElementById("MediumPepsiInCokeGlass").addEventListener("click", function(){
+					document.getElementById("SmallPepsiInCokeGlass").style.display = "none";
+					document.getElementById("MediumPepsiInCokeGlass").style.display = "none";
+					document.getElementById("E").style.display = "none";
+				})
+			}
+			if(document.getElementById("E").style.display = "none"){
+				document.getElementById("E").style.display = "inline-block";
+				document.getElementById("E").addEventListener("click", function(){
+					document.getElementById("SmallPepsiInCokeGlass").style.display = "none";
+					document.getElementById("MediumPepsiInCokeGlass").style.display = "none";
+					document.getElementById("E").style.display = "none";
+				})
+			}
+		}
 	</script>
 
-	<p id="output"></p>
+	
 	
 
 </body>
