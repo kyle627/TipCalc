@@ -2,6 +2,7 @@
 <html>
 <head>
 	<title>Tip Calculator</title>
+	<link href="https://fonts.googleapis.com/css2?family=Mukta:wght@500&display=swap" rel="stylesheet">
 	<style type="text/css">
 		.flex{
 			display: flex;
@@ -12,26 +13,40 @@
 			bottom: 0;
 			right: 0;
 		}
+		.button{
+			font-family: 'Mukta', sans-serif;
+			text-align: center;
+  			text-decoration: none;
+  			display: inline-block;
+  			font-size: 16px;
+  			margin: 4px 2px;
+  			cursor: pointer;
+  			color: black;
+  			background-color: #83F59C ;
+		}
+		.tipStyle{
+			font-family: 'Mukta', sans-serif;
+		}
 	</style>
 </head>
 <body>
-	<h1>Enter in your total Bill:<br></h1>
+	<h1 style="font-family: 'Mukta', sans-serif;">Enter in your total Bill:<br></h1>
 	<div class="flex">
 		<div>
-			<p>Bill Cost: 
+			<p style="font-family: 'Mukta', sans-serif;">Bill Cost: 
 			<input type="text" id="billCost" value="0">
-				<button onclick="randomBill()" id="randomBill" value="0">Random Bill</button>
-				<button onclick="clearBill()" id="clearBill" value="0">Clear</button>
+				<button onclick="randomBill()" id="randomBill" value="0" style="font-family: 'Mukta', sans-serif;">Random Bill</button>
+				<button onclick="clearBill()" id="clearBill" value="0" style="font-family: 'Mukta', sans-serif;">Clear</button>
 			</p>
-			<p>Example Percentages:	
-				<button onclick="tipCalculator(.10)" id="tip" value="0.10">10%</button>
-				<button onclick="tipCalculator(.15)" id="tip" value="0.15">15%</button>
-				<button onclick="tipCalculator(.20)" id="tip" value="0.20">20%</button>
-				<button onclick="tipCalculator(.25)" id="tip" value="0.20">25%</button></p>	
+			<p style="font-family: 'Mukta', sans-serif;">Example Percentages:	
+				<button onclick="tipCalculator(.10)" id="tip" value="0.10" style="font-family: 'Mukta', sans-serif;">10%</button>
+				<button onclick="tipCalculator(.15)" id="tip" value="0.15" style="font-family: 'Mukta', sans-serif;">15%</button>
+				<button onclick="tipCalculator(.20)" id="tip" value="0.20" style="font-family: 'Mukta', sans-serif;">20%</button>
+				<button onclick="tipCalculator(.25)" id="tip" value="0.20" style="font-family: 'Mukta', sans-serif;">25%</button></p>	
 
-			<p>Custom Tip Percentage:
+			<p style="font-family: 'Mukta', sans-serif;">Custom Tip Percentage:
 				<input type="text" id="customTip">
-					<button onclick="customTipCalculator()">Go</button>
+					<button onclick="customTipCalculator()" style="font-family: 'Mukta', sans-serif;">Go</button>
 			</p>
 
 			<p id="output"></p>
@@ -101,6 +116,14 @@
 						document.getElementById("SmallCurlyFries").style.display = "none";
 						document.getElementById("LargeCurlyFries").style.display = "none";
 				});
+				document.getElementById("kyleSandwich").addEventListener("click", function(){
+					document.getElementById("SmallCurlyFries").style.display = "none";
+					document.getElementById("LargeCurlyFries").style.display = "none";
+				})
+				document.getElementById("PepsiInACocaColaGlass").addEventListener("click", function(){
+					document.getElementById("SmallCurlyFries").style.display = "none";
+					document.getElementById("LargeCurlyFries").style.display = "none";
+				})
 			}
 			if (document.getElementById("LargeCurlyFries").style.display = "none") {
 				document.getElementById("LargeCurlyFries").style.display = "inline-block";
@@ -109,6 +132,14 @@
 						document.getElementById("SmallCurlyFries").style.display = "none";
 						document.getElementById("LargeCurlyFries").style.display = "none";
 					})
+				document.getElementById("kyleSandwich").addEventListener("click", function(){
+					document.getElementById("SmallCurlyFries").style.display = "none";
+					document.getElementById("LargeCurlyFries").style.display = "none";
+				})
+				document.getElementById("PepsiInACocaColaGlass").addEventListener("click", function(){
+						document.getElementById("SmallCurlyFries").style.display = "none";
+						document.getElementById("LargeCurlyFries").style.display = "none";
+				})
 			}
 		}
 		function multipleChoicesPepsi(){
@@ -136,6 +167,16 @@
 					document.getElementById("E").style.display = "none";
 				})
 			}
+			document.getElementById("kyleSandwich").addEventListener("click", function(){
+					document.getElementById("SmallPepsiInCokeGlass").style.display = "none";
+					document.getElementById("MediumPepsiInCokeGlass").style.display = "none";
+					document.getElementById("E").style.display = "none";
+				})
+			document.getElementById("CurlyFries").addEventListener("click", function(){
+					document.getElementById("SmallPepsiInCokeGlass").style.display = "none";
+					document.getElementById("MediumPepsiInCokeGlass").style.display = "none";
+					document.getElementById("E").style.display = "none";
+			})
 		}
 	</script>
 
