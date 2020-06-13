@@ -55,8 +55,8 @@
 		<div>
 
 			<button onclick="accumulateBill(9)" id="kyleSandwich" value="0" class="button">Kyle Sandwich</button>
-			<button onclick="multipleChoicesFries()" id="CurlyFries" value="0" class="button">Curly Fries</button><br>
-			<button onclick="multipleChoicesPepsi()" id="PepsiInACocaColaGlass" value="0" class="button">Pepsi In A Coca-Cola Glass</button>
+			<button onclick="multipleFryChoices()" id="CurlyFries" value="0" class="button">Curly Fries</button><br>
+			<button onclick="multipleDrinkChoices()" id="Pepsi" value="0" class="button">Pepsi</button>
 			
 
 		</div>
@@ -65,9 +65,9 @@
 	<div class="subGroup">
 		<button onclick="accumulateBill(3.25)" id="SmallCurlyFries" value="0" class="button" 	style="display: none;">Small Curly Fries</button>
 		<button onclick="accumulateBill(5.75)" id="LargeCurlyFries" value="0" class="button" 	style="display: none;">Large Curly Fries</button>
-		<button onclick="accumulateBill(1.50)" id="SmallPepsiInCokeGlass" value="0" class="		button" style="display: none;">Small</button>
-		<button onclick="accumulateBill(2.50)" id="MediumPepsiInCokeGlass" value="0" class="	button" style="display: none;">Medium</button>
-		<button onclick="accumulateBill(3.00)" id="E" value="0" class="button" style="display: none;">E</button>
+		<button onclick="accumulateBill(1.50)" id="Small" value="0" class="button" style="display: none;">Small</button>
+		<button onclick="accumulateBill(2.50)" id="Medium" value="0" class="button" style="display: none;">Medium</button>
+		<button onclick="accumulateBill(3.00)" id="Large" value="0" class="button" style="display: none;">Large</button>
 	</div>
 	
 	<script type="text/javascript">
@@ -77,12 +77,11 @@
 				randomBill();
 			}
 			document.getElementById("billCost").value = randomBill;
-			//console.log(randomBill);
 		}
 		function tipCalculator(percent){
 			var mealcost = parseFloat(document.getElementById("billCost").value);
 			var tipPercent = percent; //parse float not required as values arent custom.
-			var tip = Math.round(mealcost * tipPercent);
+			var tip = (mealcost * tipPercent).toFixed(2); //round to two digits
 			document.getElementById("output").innerHTML = "Tip your waitor/waitress: " + tip + " dollars.";
 		}
 		function customTipCalculator(){
@@ -103,81 +102,76 @@
 		}
 		function accumulateBill(amount){
 			var billTotal = parseInt(document.getElementById("billCost").value);
-			
-			billTotal += amount;
-			document.getElementById("billCost").value = billTotal;
+			billTotal += amount + applyTax(amount);
+			document.getElementById("billCost").value = billTotal.toFixed(2);
 
 		}
-		function multipleChoicesFries(){
+		function multipleFryChoices(){
 			if (document.getElementById("SmallCurlyFries").style.display = "none") {
-				document.getElementById("SmallCurlyFries").style.display = "inline-block"; 
-				document.getElementById("SmallCurlyFries").addEventListener("click", 
-					function(){
-						document.getElementById("SmallCurlyFries").style.display = "none";
-						document.getElementById("LargeCurlyFries").style.display = "none";
-				});
-				document.getElementById("kyleSandwich").addEventListener("click", function(){
-					document.getElementById("SmallCurlyFries").style.display = "none";
-					document.getElementById("LargeCurlyFries").style.display = "none";
-				})
-				document.getElementById("PepsiInACocaColaGlass").addEventListener("click", function(){
-					document.getElementById("SmallCurlyFries").style.display = "none";
-					document.getElementById("LargeCurlyFries").style.display = "none";
+				OpenFrySizes();
+				document.getElementById("SmallCurlyFries").addEventListener("click", function(){
+					clearSubGroups();
 				})
 			}
 			if (document.getElementById("LargeCurlyFries").style.display = "none") {
-				document.getElementById("LargeCurlyFries").style.display = "inline-block";
-				document.getElementById("LargeCurlyFries").addEventListener("click",
-					function(){
-						document.getElementById("SmallCurlyFries").style.display = "none";
-						document.getElementById("LargeCurlyFries").style.display = "none";
-					})
-				document.getElementById("kyleSandwich").addEventListener("click", function(){
-					document.getElementById("SmallCurlyFries").style.display = "none";
-					document.getElementById("LargeCurlyFries").style.display = "none";
+				OpenFrySizes();
+				document.getElementById("LargeCurlyFries").addEventListener("click", function(){
+					clearSubGroups();
 				})
-				document.getElementById("PepsiInACocaColaGlass").addEventListener("click", function(){
-						document.getElementById("SmallCurlyFries").style.display = "none";
-						document.getElementById("LargeCurlyFries").style.display = "none";
+			}	
+		}
+
+		function multipleDrinkChoices(){
+			if (document.getElementById("Small").style.display = "none") {
+				OpenDrinkSizes();
+				document.getElementById("Small").addEventListener("click", function(){
+					clearSubGroups();
+				})
+			}
+			if(document.getElementById("Medium").style.display = "none"){
+				OpenDrinkSizes();
+				document.getElementById("Medium").addEventListener("click", function(){
+					clearSubGroups();
+				})
+			}
+			if(document.getElementById("Large").style.display = "none"){
+				OpenDrinkSizes();
+				document.getElementById("Large").addEventListener("click", function(){
+					clearSubGroups();
 				})
 			}
 		}
-		function multipleChoicesPepsi(){
-			if (document.getElementById("SmallPepsiInCokeGlass").style.display = "none") {
-				document.getElementById("SmallPepsiInCokeGlass").style.display = "inline-block";
-				document.getElementById("SmallPepsiInCokeGlass").addEventListener("click", function(){
-					document.getElementById("SmallPepsiInCokeGlass").style.display = "none";
-					document.getElementById("MediumPepsiInCokeGlass").style.display = "none";
-					document.getElementById("E").style.display = "none";
-				})
-			}
-			if(document.getElementById("MediumPepsiInCokeGlass").style.display = "none"){
-				document.getElementById("MediumPepsiInCokeGlass").style.display = "inline-block";
-				document.getElementById("MediumPepsiInCokeGlass").addEventListener("click", function(){
-					document.getElementById("SmallPepsiInCokeGlass").style.display = "none";
-					document.getElementById("MediumPepsiInCokeGlass").style.display = "none";
-					document.getElementById("E").style.display = "none";
-				})
-			}
-			if(document.getElementById("E").style.display = "none"){
-				document.getElementById("E").style.display = "inline-block";
-				document.getElementById("E").addEventListener("click", function(){
-					document.getElementById("SmallPepsiInCokeGlass").style.display = "none";
-					document.getElementById("MediumPepsiInCokeGlass").style.display = "none";
-					document.getElementById("E").style.display = "none";
-				})
-			}
-			document.getElementById("kyleSandwich").addEventListener("click", function(){
-					document.getElementById("SmallPepsiInCokeGlass").style.display = "none";
-					document.getElementById("MediumPepsiInCokeGlass").style.display = "none";
-					document.getElementById("E").style.display = "none";
-				})
-			document.getElementById("CurlyFries").addEventListener("click", function(){
-					document.getElementById("SmallPepsiInCokeGlass").style.display = "none";
-					document.getElementById("MediumPepsiInCokeGlass").style.display = "none";
-					document.getElementById("E").style.display = "none";
-			})
+
+		function OpenFrySizes(){
+			document.getElementById("SmallCurlyFries").style.display = "inline-block";
+			document.getElementById("LargeCurlyFries").style.display = "inline-block";
+			document.getElementById("Small").style.display = "none";
+			document.getElementById("Medium").style.display = "none"; 
+			document.getElementById("Large").style.display = "none";
 		}
+
+		function OpenDrinkSizes(){
+			document.getElementById("Small").style.display = "inline-block";
+			document.getElementById("Medium").style.display = "inline-block"; 
+			document.getElementById("Large").style.display = "inline-block";
+			document.getElementById("SmallCurlyFries").style.display = "none";
+			document.getElementById("LargeCurlyFries").style.display = "none";
+		}
+
+		function clearSubGroups(){
+			document.getElementById("Small").style.display = "none";
+			document.getElementById("Medium").style.display = "none"; 
+			document.getElementById("Large").style.display = "none";
+			document.getElementById("SmallCurlyFries").style.display = "none";
+			document.getElementById("LargeCurlyFries").style.display = "none";
+		}
+
+		function applyTax(beforeTaxValue){
+			var taxValue = 0.0625;
+			var aftertaxVaue = (beforeTaxValue * taxValue);
+			return aftertaxVaue;
+		}
+
 	</script>
 
 	
