@@ -1,0 +1,23 @@
+.flex{
+	display: flex;
+	justify-content: space-between; 
+}
+.subGroup{
+	position: absolute;
+	bottom: 0;
+	right: 0;
+}
+.button{
+	font-family: 'Mukta', sans-serif;
+	text-align: center;
+  	text-decoration: none;
+  	display: inline-block;
+  	font-size: 16px;
+  	margin: 4px 2px;
+  	cursor: pointer;
+  	color: black;
+  	background-color: #83F59C ;
+}
+.tipStyle{
+	font-family: 'Mukta', sans-serif;
+}

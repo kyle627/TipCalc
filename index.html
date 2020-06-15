@@ -3,31 +3,8 @@
 <head>
 	<title>Tip Calculator</title>
 	<link href="https://fonts.googleapis.com/css2?family=Mukta:wght@500&display=swap" rel="stylesheet">
-	<style type="text/css">
-		.flex{
-			display: flex;
-			justify-content: space-between; 
-		}
-		.subGroup{
-			position: absolute;
-			bottom: 0;
-			right: 0;
-		}
-		.button{
-			font-family: 'Mukta', sans-serif;
-			text-align: center;
-  			text-decoration: none;
-  			display: inline-block;
-  			font-size: 16px;
-  			margin: 4px 2px;
-  			cursor: pointer;
-  			color: black;
-  			background-color: #83F59C ;
-		}
-		.tipStyle{
-			font-family: 'Mukta', sans-serif;
-		}
-	</style>
+	<link rel="stylesheet" type="text/css" href="construct.css">
+	<script type="text/javascript" src="scripts.js"></script>
 </head>
 <body>
 	<h1 style="font-family: 'Mukta', sans-serif;">Enter in your total Bill:<br></h1>
@@ -57,6 +34,7 @@
 			<button onclick="accumulateBill(9)" id="kyleSandwich" value="0" class="button">Kyle Sandwich</button>
 			<button onclick="multipleFryChoices()" id="CurlyFries" value="0" class="button">Curly Fries</button><br>
 			<button onclick="multipleDrinkChoices()" id="Pepsi" value="0" class="button">Pepsi</button>
+			<button onclick="accumulateBill(10)" id="dawaBurger" value="0" class="button">DawaBurger</button>
 			
 
 		</div>
@@ -69,113 +47,6 @@
 		<button onclick="accumulateBill(2.50)" id="Medium" value="0" class="button" style="display: none;">Medium</button>
 		<button onclick="accumulateBill(3.00)" id="Large" value="0" class="button" style="display: none;">Large</button>
 	</div>
-	
-	<script type="text/javascript">
-		function randomBill(){
-			var randomBill = Math.round(Math.random() * 100);
-			if (randomBill < 10) {
-				randomBill();
-			}
-			document.getElementById("billCost").value = randomBill;
-		}
-		function tipCalculator(percent){
-			var mealcost = parseFloat(document.getElementById("billCost").value);
-			var tipPercent = percent; //parse float not required as values arent custom.
-			var tip = (mealcost * tipPercent).toFixed(2); //round to two digits
-			document.getElementById("output").innerHTML = "Tip your waitor/waitress: " + tip + " dollars.";
-		}
-		function customTipCalculator(){
-			var mealcost = parseFloat(document.getElementById("billCost").value);
-			var tipPercent = parseFloat(document.getElementById("customTip").value);
-			if (tipPercent > 100) {
-				tipPercent = 100;
-			}
-			if (tipPercent <= 0) {
-				tipPercent = 0;
-			}
-			var tip = Math.round((mealcost * tipPercent) / 100);
-			document.getElementById("output").innerHTML = "Tip your waitor/waitress: " + tip + " dollars.";
-		}
-		function clearBill(){
-			document.getElementById("billCost").value = 0;
-			document.getElementById("output").innerHTML = "";
-		}
-		function accumulateBill(amount){
-			var billTotal = parseInt(document.getElementById("billCost").value);
-			billTotal += amount + applyTax(amount);
-			document.getElementById("billCost").value = billTotal.toFixed(2);
-
-		}
-		function multipleFryChoices(){
-			if (document.getElementById("SmallCurlyFries").style.display = "none") {
-				OpenFrySizes();
-				document.getElementById("SmallCurlyFries").addEventListener("click", function(){
-					clearSubGroups();
-				})
-			}
-			if (document.getElementById("LargeCurlyFries").style.display = "none") {
-				OpenFrySizes();
-				document.getElementById("LargeCurlyFries").addEventListener("click", function(){
-					clearSubGroups();
-				})
-			}	
-		}
-
-		function multipleDrinkChoices(){
-			if (document.getElementById("Small").style.display = "none") {
-				OpenDrinkSizes();
-				document.getElementById("Small").addEventListener("click", function(){
-					clearSubGroups();
-				})
-			}
-			if(document.getElementById("Medium").style.display = "none"){
-				OpenDrinkSizes();
-				document.getElementById("Medium").addEventListener("click", function(){
-					clearSubGroups();
-				})
-			}
-			if(document.getElementById("Large").style.display = "none"){
-				OpenDrinkSizes();
-				document.getElementById("Large").addEventListener("click", function(){
-					clearSubGroups();
-				})
-			}
-		}
-
-		function OpenFrySizes(){
-			document.getElementById("SmallCurlyFries").style.display = "inline-block";
-			document.getElementById("LargeCurlyFries").style.display = "inline-block";
-			document.getElementById("Small").style.display = "none";
-			document.getElementById("Medium").style.display = "none"; 
-			document.getElementById("Large").style.display = "none";
-		}
-
-		function OpenDrinkSizes(){
-			document.getElementById("Small").style.display = "inline-block";
-			document.getElementById("Medium").style.display = "inline-block"; 
-			document.getElementById("Large").style.display = "inline-block";
-			document.getElementById("SmallCurlyFries").style.display = "none";
-			document.getElementById("LargeCurlyFries").style.display = "none";
-		}
-
-		function clearSubGroups(){
-			document.getElementById("Small").style.display = "none";
-			document.getElementById("Medium").style.display = "none"; 
-			document.getElementById("Large").style.display = "none";
-			document.getElementById("SmallCurlyFries").style.display = "none";
-			document.getElementById("LargeCurlyFries").style.display = "none";
-		}
-
-		function applyTax(beforeTaxValue){
-			var taxValue = 0.0625;
-			var aftertaxVaue = (beforeTaxValue * taxValue);
-			return aftertaxVaue;
-		}
-
-	</script>
-
-	
-	
-
+		
 </body>
 </html>
